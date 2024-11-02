@@ -3,25 +3,31 @@ import http from 'http';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { connectDB } from './config/db';
+import userRouter from './routes/userRoutes';
 
 
 dotenv.config();
 
 // Initialize Express app
 const app = express();
+const server = http.createServer(app);
+
 
 // Middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// Routes
+
+
 
 
 // Database connection
 connectDB();
 
-// Create HTTP server for Socket.io
-const server = http.createServer(app);
+
+
+// Routes
+app.use('/api/user', userRouter);
 
 // Initialize Socket.io
 
