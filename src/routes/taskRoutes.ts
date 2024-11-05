@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { protect } from '../middleware/auth';
 import { Request, Response } from 'express';
 
@@ -10,7 +10,7 @@ import {
   completeTask, // Import the new completeTask function
 } from '../controllers/taskController';
 
-const taskRouter = express.Router();
+const taskRouter: Router = express.Router();
 
 // Define routes and link them to controller functions
 taskRouter.get('/', protect, async (req: Request, res: Response) => {
