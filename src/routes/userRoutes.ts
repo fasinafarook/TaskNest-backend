@@ -1,11 +1,9 @@
-
-import express from 'express';
+import express, { Router } from 'express';
 import { Request, Response } from 'express';
 import { register, login } from '../controllers/userController';
 
 
-const userRouter = Router();
-
+const userRouter: Router = express.Router();
 
 userRouter.post('/register',async (req: Request, res: Response) => {
     await register(req, res);
