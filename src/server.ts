@@ -9,10 +9,6 @@ import taskRouter from './routes/taskRoutes';
 import initializeSocket from './config/socket';
 import { setSocketServerInstance } from './controllers/taskController';
 
-import mongoose  from './config/db';
-import userRouter from './routes/userRoutes';
-
-
 dotenv.config();
 
 const app = express();
@@ -28,9 +24,6 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use(cors());
-app.use(express.json());
-
 // Database connection
 mongoose();
 
@@ -38,10 +31,7 @@ mongoose();
 app.use('/api/user', userRouter);
 app.use('/api/task', taskRouter);
 
-// Routes
-app.use('/api/user', userRouter);
 
-// Initialize Socket.io
 
 
 const PORT = process.env.PORT || 5000;
