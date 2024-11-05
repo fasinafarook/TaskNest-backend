@@ -1,14 +1,16 @@
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose from 'mongoose';
 
-export const connectDB = async (): Promise<void> => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI || '', {
-      // Explicitly cast as ConnectOptions if additional properties are needed
-    } as ConnectOptions);
-
-    console.log(`MongoDB connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`Error: ${(error as Error).message}`);
-    process.exit(1); // Exit process with failure
-  }
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI as string);
+        console.log('Connected to MongoDB');
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            console.error('MongoDB connection error:', err.message);
+        } else {
+            console.error('MongoDB connection error:', err);
+        }
+    }
 };
+
+export default connectDB;
